@@ -5,7 +5,7 @@ namespace dataSpike
 {
     class Program
     {
-        private static HttpClient client = new HttpClient();
+        private static HttpClient client = new();
 
         private static readonly string baseUri = "https://api.henrikdev.xyz";
         private static readonly string route = "valorant";
