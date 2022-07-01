@@ -10,6 +10,8 @@ namespace Entities
         [JsonProperty("data")]
         private Data? Info { get; set; }
 
+        private MMR MMR { get; set; }
+
         public partial class Data
         {
             [JsonProperty("puuid")]
@@ -42,6 +44,9 @@ namespace Entities
         public string GetTag() => Info.Tag;
         public Card GetCard() => new Card((Guid)Info.Card.Id, Info.Card.Small, Info.Card.Large, Info.Card.Wide);
         public string GetLastUpdate() => Info.LastUpdate;
+        public MMR GetMMR() => MMR;
+
+        public void SetMMR(MMR mmr) { MMR = mmr; }
 
         public override string ToString()
         {
@@ -55,7 +60,8 @@ namespace Entities
                 $"Small Card:{GetCard().GetSmallCard()}\n" +
                 $"Large Card:{GetCard().GetLargeCard()}\n" +
                 $"Wide Card:{GetCard().GetWideCard()}\n" +
-                $"Last Update:{GetLastUpdate()}";
+                $"Last Update:{GetLastUpdate()}\n" +
+                $"{GetMMR().ToString()}";
         }
     }
 }
