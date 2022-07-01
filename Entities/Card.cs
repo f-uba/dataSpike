@@ -28,5 +28,13 @@ namespace Entities
         public Uri GetSmallCard() => Small;
         public Uri GetLargeCard() => Large;
         public Uri GetWideCard() => Wide;
+
+        public override string ToString()
+        {
+            return $"Card_Id:{GetId()}\n" +
+                $"Card_Small:{GetSmallCard()}\n" +
+                $"Card_Large:{GetLargeCard()}\n" +
+                $"Card_Wide:{GetWideCard()}";
+        }
     }
 }

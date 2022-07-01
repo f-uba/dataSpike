@@ -56,11 +56,8 @@ namespace Entities
                 $"Level:{GetLevel()}\n" +
                 $"Name:{GetName()}\n" +
                 $"Tag:{GetTag()}\n" +
-                $"Card Id:{GetCard().GetId()}\n" +
-                $"Small Card:{GetCard().GetSmallCard()}\n" +
-                $"Large Card:{GetCard().GetLargeCard()}\n" +
-                $"Wide Card:{GetCard().GetWideCard()}\n" +
                 $"Last Update:{GetLastUpdate()}\n" +
+                $"{GetCard().ToString()}\n" +
                 $"{GetMMR().ToString()}";
         }
     }
