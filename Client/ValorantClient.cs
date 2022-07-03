@@ -1,11 +1,11 @@
 ﻿using Entities;
+using Entities.Exceptions;
 using Newtonsoft.Json;
 
 namespace Client
 {
     public class ValorantClient
     {
-        
         private const string baseUri = "https://api.henrikdev.xyz";
         private const string route = "valorant";
         private const string version1 = "v1";
@@ -30,6 +30,8 @@ namespace Client
             var content = await response.Content.ReadAsStringAsync();
             var account = JsonConvert.DeserializeObject<Account>(content);
 
+            _ = new StatusCodeException(account.GetStatus(), account);
+
             account.SetMMR(await GetMMRAsync(account.GetRegion()));
 
             return account;
@@ -43,6 +45,8 @@ namespace Client
             var response = await client.GetAsync($"{route}/{version1}/mmr/{region}/{Name}/{Tag}");
             var content = await response.Content.ReadAsStringAsync();
             var mmr = JsonConvert.DeserializeObject<MMR>(content);
+
+            _ = new StatusCodeException(mmr.GetStatus(), mmr);
 
             return mmr;
         }
