@@ -33,6 +33,7 @@ namespace Client
             _ = new StatusCodeException(account.GetStatus(), account);
 
             account.SetMMR(await GetMMRAsync(account.GetRegion()));
+            account.SetMatches(await GetMatchesAsync(account.GetRegion()));
 
             return account;
         }
@@ -49,6 +50,20 @@ namespace Client
             _ = new StatusCodeException(mmr.GetStatus(), mmr);
 
             return mmr;
+        }
+
+        private async Task<Matches> GetMatchesAsync(string region)
+        {
+            HttpClient client = new();
+            client.BaseAddress = new Uri(baseUri);
+
+            var response = await client.GetAsync($"{route}/{version3}/matches/{region}/{Name}/{Tag}");
+            var content = await response.Content.ReadAsStringAsync();
+            var matches = JsonConvert.DeserializeObject<Matches>(content);
+
+            _ = new StatusCodeException(matches.GetStatus(), matches);
+
+            return matches;
         }
     }
 }
